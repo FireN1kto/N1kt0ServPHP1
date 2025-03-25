@@ -1,0 +1,22 @@
+{
+    "name": "firen1kto/n1kt0servphp1",
+    "description": "development of basic application architecture",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "f1ren1kto",
+            "email": "maksimcymbal77@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4 | ^8.0"
+    },
+    "autoload": {
+        "prs-4": {
+            "Src\\": "core/Src/",
+            "": "app/"
+        }
+    }
+}
