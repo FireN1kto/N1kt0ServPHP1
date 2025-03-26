@@ -670,3 +670,5 @@
 10.30.8.15 - - [25/Mar/2025:03:00:59 -0700] "GET /hello HTTP/1.1" 200 482 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
 10.30.8.15 - - [25/Mar/2025:03:01:02 -0700] "GET /hello HTTP/1.1" 200 482 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
 10.30.8.15 - - [25/Mar/2025:03:01:02 -0700] "GET /favicon.ico HTTP/1.1" 200 553 "http://iaxbpcp-m5.wsr.ru/hello" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+10.30.8.15 - - [26/Mar/2025:03:21:59 -0700] "GET / HTTP/1.1" 200 555 "http://wsr.ru/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+10.30.8.15 - - [26/Mar/2025:03:21:59 -0700] "GET /favicon.ico HTTP/1.1" 200 554 "http://iaxbpcp-m5.wsr.ru/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
