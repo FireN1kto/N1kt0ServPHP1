@@ -2,9 +2,9 @@
 return [
     'driver' => 'mysql',
     'host' => 'localhost',
-    'database' => 'iaxbpcp-m5',
-    'username' => 'root',
-    'password' => '',
+    'database' => 'hvpetxch_m5',
+    'username' => 'hvpetxch',
+    'password' => 'Y2DNhV',
     'charset' => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix' => '',
