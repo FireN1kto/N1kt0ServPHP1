@@ -2,7 +2,7 @@
 return [
     'driver' => 'mysql',
     'host' => 'localhost',
-    'database' => 'mvc',
+    'database' => 'iaxbpcp-m5',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',

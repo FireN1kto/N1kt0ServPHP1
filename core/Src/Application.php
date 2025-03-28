@@ -35,6 +35,7 @@ class Application
 
     public function run(): void
     {
+        $this->dbRun();
         $this->route->setPrefix($this->settings->getRootPath());
         $this->route->start();
     }
