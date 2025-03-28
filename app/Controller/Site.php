@@ -23,7 +23,7 @@ class Site
     public function signup(Request $request): string
     {
         if ($request->method==='POST' && User::create($request->all())){
-            return new View('site.signup', ['message' => 'Вы успешно зарегестрированны']);
+            app()->route->redirect('/go');
         }
         return new View('site.signup');
     }
