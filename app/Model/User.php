@@ -21,7 +21,6 @@ class User extends Model implements IdentityInterface
     {
         static::creating(function ($user) {
             $user->password = md5($user->password);
-            $user->save();
         });
     }
 
