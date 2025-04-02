@@ -6,12 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 class Role extends Model
 {
-    protected $table = 'hvpetxch_m5_role';
+    protected $table = 'role';
 
-    protected $fillable = [
-        'admin',
-        'registration_officer'
-    ];
+    protected $fillable = ['name_role'];
 
     public function users(): HasMany
     {

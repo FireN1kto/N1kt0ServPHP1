@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class CreateInfo extends Model
 {
-    protected $table = 'hvpetxch_m5_create_info';
+    protected $table = 'create_info';
     protected $fillable = [
         'creation_date',
         'user_id'

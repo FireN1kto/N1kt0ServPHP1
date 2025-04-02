@@ -2,7 +2,7 @@
 
 namespace Model;
 
-use Couchbase\Role;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,12 +13,16 @@ class User extends Model implements IdentityInterface
 {
     use HasFactory;
 
-    protected $table = 'hvpetxch_m5_users';
+    protected $table = 'users';
     public $timestamps = false;
     protected $fillable = [
         'name',
         'login',
-        'password'
+        'password',
+        'role_id',
+        'appointment_id',
+        'patient_id',
+        'doctor_id',
     ];
 
     protected $hidden = ['password'];
@@ -58,6 +62,18 @@ class User extends Model implements IdentityInterface
 
     public function isAdmin(): bool
     {
-        return $this->role_id === 1;
+        return $this->role && $this->role->name === 'admin';
+    }
+
+    public static function adminExists():bool
+    {
+        return self::whereHas('role', function ($query) {
+            $query->where('name_role', 'admin');
+        })->exists();
+    }
+
+    public function isregistrationOfficer(): bool
+    {
+        return $this->role && $this->role->name === 'registration_officer';
     }
 }

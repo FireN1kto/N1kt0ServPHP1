@@ -4,6 +4,7 @@ namespace Controller;
 
 use Model\Post;
 use Model\User;
+use Model\Role;
 use Src\View;
 use Src\Request;
 use Src\Auth\Auth;
@@ -23,10 +24,25 @@ class Site
 
     public function signup(Request $request): string
     {
-        if ($request->method==='POST' && User::create($request->all())){
-            app()->route->redirect('/go');
+        $roles = Role::all();
+        $allowAdmin = !User::adminExists();
+
+        if ($request->method === 'POST') {
+            $data = $request->all();
+            if (!$allowAdmin) {
+                $data['role_id'] = Role::where('name_role', 'registration_officer')->first()->id;
+            } else {
+                $data['role_id'] = $request->role_id;
+            }
+            if(User::create($data)) {
+                Auth::attempt($data);
+                return app()->route->redirect('/hello');
+            }
         }
-        return new View('site.signup');
+        return new View('site.signup', [
+            'roles' => $roles,
+            'allowAdmin' => $allowAdmin,
+        ]);
     }
 
     public function login(Request $request): string

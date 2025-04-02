@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 class Position extends Model
 {
-    protected $table = 'hvpetxch_m5_position';
+    protected $table = 'position';
 
     protected $fillable = ['name_position'];
 

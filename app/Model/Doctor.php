@@ -11,7 +11,7 @@ class Doctor extends Model
 {
     use HasFactory;
 
-    protected $table = 'hvpetxch_m5_doctor';
+    protected $table = 'doctor';
     public $timestamps = false;
     protected $fillable = [
         'surname',
