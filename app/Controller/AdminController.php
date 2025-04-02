@@ -16,10 +16,11 @@ class AdminController
             $data['role_id'] = Role::where('name_role', 'registration_officer')->first()->id;
 
             User::create($data);
-            return redirect('/admin/officers-list');
+            app()->route->redirect('/officers-list');
         }
+        $officers = User::all();
 
-        return new View('admin.create-officer');
+        return new View('admin.create-officer', ['officers' => $officers]);
     }
 
     public function deleteOfficer(Request $request): void
@@ -30,7 +31,7 @@ class AdminController
             $officer->delete();
         }
 
-        app()->route->redirect('/admin/officers');
+        app()->route->redirect('/officers-list');
     }
 
     public function officerList(Request $request): string
@@ -38,7 +39,16 @@ class AdminController
         $officers = User::whereHas('role', function ($query) {
             $query->where('name_role', 'registration_officer');
         })->get();
+        if($request->method == 'POST'){
+            $data = $request->all();
+            $officer = User::find($request->id);
 
+            if ($officer && $officer->role_id->name_role == 'registration_officer') {
+                User::where('id', $data['id'])->delete();
+            }
+
+            app()->route->redirect('/officers-list');
+        }
         return new View('admin.officers-list', ['officers' => $officers]);
     }
 }

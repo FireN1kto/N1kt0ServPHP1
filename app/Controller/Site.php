@@ -19,7 +19,15 @@ class Site
 
     public function hello(): string
     {
-        return new View('site.hello', ['message' => 'hello working']);
+        $user = Auth::user();
+
+        if($user->role->name_role == 'admin'){
+            return new View('admin.hello', ['message' => 'Панель администратора']);
+        } else if ($user->role_id->name_role == 'registration_officer'){
+            return new View('officer.hello', ['message' => 'Панель сотрудника регистрации']);
+        } else{
+            return new View('site.hello', ['message' => 'Гостеваое посещение']);
+        }
     }
 
     public function signup(Request $request): string

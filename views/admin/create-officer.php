@@ -5,4 +5,5 @@
     <label>Пароль: <input type="password" name="password" required></label>
     <button type="submit">Создать</button>
 </form>
-<a href="/admin/officers-list">Назад к списку</a>
+<a href="/officers-list">Назад к списку</a>
+<a href="/hello">Назад к панели</a>

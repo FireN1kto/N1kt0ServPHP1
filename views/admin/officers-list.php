@@ -10,7 +10,7 @@
             <td><?= $officer->name ?></td>
             <td><?= $officer->login ?></td>
             <td>
-                <form method="post" action="/admin/delete-officer">
+                <form method="post" action="/officers-list">
                     <input type="hidden" name="id" value="<?= $officer->id ?>">
                     <button type="submit">Удалить</button>
                 </form>
@@ -18,4 +18,5 @@
         </tr>
     <?php endforeach; ?>
 </table>
-<a href="/admin/create-officer">Добавить нового</a>
+<a href="/create-officer">Добавить нового</a>
+<a href="/hello">Назад к панели</a>
