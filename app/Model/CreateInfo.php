@@ -3,7 +3,6 @@
 namespace Model;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class CreateInfo extends Model
 {
     protected $table = 'create_info';
@@ -16,7 +15,7 @@ class CreateInfo extends Model
         'creation_date' => 'date',
     ];
 
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongTo(User::class, 'user_id');
     }

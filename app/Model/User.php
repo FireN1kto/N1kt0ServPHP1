@@ -5,8 +5,6 @@ namespace Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Src\Auth\IdentityInterface;
 
 class User extends Model implements IdentityInterface
@@ -50,19 +48,14 @@ class User extends Model implements IdentityInterface
             'password' => md5($credentials['password'])])->first();
     }
 
-    public function role(): BelongsTo
+    public function role()
     {
         return $this->belongsTo(Role::class, 'role_id');
     }
 
-    public function createdAppointments(): HasMany
+    public function createdAppointments()
     {
         return $this->hasMany(Appointment::class, 'create-info_id');
-    }
-
-    public function isAdmin(): bool
-    {
-        return $this->role && $this->role->name === 'admin';
     }
 
     public static function adminExists():bool

@@ -4,8 +4,6 @@ namespace Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Doctor extends Model
 {
@@ -27,12 +25,12 @@ class Doctor extends Model
         'date-of-birth' => 'date',
     ];
 
-    public function position(): BelongsTo
+    public function position()
     {
         return $this->belongsTo(Position::class, 'position_id');
     }
 
-    public function appointments(): HasMany
+    public function appointments()
     {
         return $this->hasMany(Appointment::class, 'doctor_id');
     }

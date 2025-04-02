@@ -4,7 +4,6 @@ namespace Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Appointment extends Model
 {
     use HasFactory;
@@ -26,17 +25,17 @@ class Appointment extends Model
         'appointment_time' => 'datetime:H:i'
     ];
 
-    public function doctor(): BelongsTo
+    public function doctor()
     {
         return $this->belongsTo(Doctor::class, 'doctor_id');
     }
 
-    public function patient(): BelongsTo
+    public function patient()
     {
         return $this->belongsTo(Patient::class, 'patient_id');
     }
 
-    public function createInfo(): BelongsTo
+    public function createInfo()
     {
         return $this->belongsTo(CreateInfo::class, 'create-info_id');
     }

@@ -30,7 +30,7 @@ class Site
         if ($request->method === 'POST') {
             $data = $request->all();
             if (!$allowAdmin) {
-                $data['role_id'] = Role::where('name_role', 'registration_officer')->first()->id;
+                $data['role_id'] = Role::where('name_role', 'user')->first()->id;
             } else {
                 $data['role_id'] = $request->role_id;
             }

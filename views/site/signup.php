@@ -9,10 +9,11 @@
         <select id="role_id" name="role_id" <?= !$allowAdmin ? "disabled" : ""; ?>>
             <?php foreach ($roles as $role): ?>
                 <?php if ($role->name_role === 'admin' && !$allowAdmin) continue ?>
-                <option value="<?= $role->id ?>" <?= ($role->name_role === 'registration_officer' && !$allowAdmin) ? "selected" : ""?>>
+                <?php if ($role->name_role === 'registration_officer') continue; ?>
+                <option value="<?= $role->id ?>" <?= ($role->name_role === 'user' && !$allowAdmin) ? "selected" : ""?>>
                     <?= match($role->name_role) {
                         'admin' => 'Администратор',
-                        'registration_officer' => 'Сотрудник регистрации',
+                        'user' => 'Посетитель',
                         default => $role->name_role
                     } ?>
                 </option>
