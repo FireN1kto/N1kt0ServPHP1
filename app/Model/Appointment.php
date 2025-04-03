@@ -15,7 +15,7 @@ class Appointment extends Model
         'appointment_time',
         'title',
         'symptoms',
-        'create-info_id',
+        'createInfo_id',
         'doctor_id',
         'patient_id'
     ];
@@ -37,6 +37,6 @@ class Appointment extends Model
 
     public function createInfo()
     {
-        return $this->belongsTo(CreateInfo::class, 'create-info_id');
+        return $this->belongsTo(CreateInfo::class, 'createInfo_id');
     }
 }

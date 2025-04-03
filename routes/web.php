@@ -11,3 +11,7 @@ Route::add(['GET', 'POST'], '/create-officer', [Controller\AdminController::clas
     ->middleware('auth','admin');
 Route::add(['GET', 'POST'], '/officers-list', [Controller\AdminController::class, 'officerList'])
     ->middleware('auth','admin');
+Route::add(['GET', 'POST'], '/listAppointments', [Controller\AppointmentController::class, 'AppointmentList'])
+    ->middleware('auth','officer');
+Route::add(['GET', 'POST'], '/addAppointment', [Controller\AppointmentController::class, 'addAppointment'])
+    ->middleware('auth','officer');

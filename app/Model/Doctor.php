@@ -16,8 +16,8 @@ class Doctor extends Model
         'name',
         'patronymic',
         'date-of-birth',
-        'specializtion',
-        'create-info_id',
+        'specialization',
+        'createInfo_id',
         'position_id'
     ];
 
