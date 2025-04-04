@@ -2,12 +2,10 @@
 
 namespace Controller;
 
-use Cassandra\Exception\ValidationException;
 use Model\Appointment;
 use Model\CreateInfo;
 use Model\Doctor;
 use Model\Patient;
-use mysql_xdevapi\Exception;
 use Src\Auth\Auth;
 use Src\Request;
 use Src\View;
@@ -31,7 +29,16 @@ class AppointmentController
         $doctors = Doctor::all();
 
         if($request->method === "POST") {
-            return $this->store($request);
+            $result = $this->store($request);
+            if($result === true) {
+                return app()->route->redirect('/listApointments');
+            }
+            return new View('officer.addAppointment', [
+                'patients' => Patient::all(),
+                'doctors' => Doctor::all(),
+                'error' => $result,
+                'old' => $request->all()
+            ]);
         }
 
         return new View('officer.addAppointment', [
@@ -43,65 +50,52 @@ class AppointmentController
 
     public function store(Request $request)
     {
-        try {
-            $validated = $this->validate($request);
-            $this->chekDoctorAvailability(
-                $validated['doctor_id'],
-                $validated['appointment_date'],
-                $validated['appointment_time']
-            );
-
-            $this->createAppointment($validated);
-            return app()->route->redirect('/listAppointments');
-        } catch (Exception $e) {
-            return new View('officer.addAppointment', [
-                'patients' => Patient::all(),
-                'doctors' => Doctor::all(),
-                'error' => $e->getMessage(),
-                'old' => $request->all()
-            ]);
+        if(empty($request->title) || strlen($request->title) < 15) {
+            return "название записи должно содержать минимум 15 символов";
         }
-    }
+        if (empty($request->appointment_date) || strtotime($request->appointment_date) < strtotime('today')) {
+            return "Дата приема не может быть в прошлом";
+        }
+        if (empty($request->appointment_time)) {
+            return "Укажите время приема";
+        }
+        if (empty($request->symptoms) || strlen($request->symptoms) < 15) {
+            return "Описание симптомов должно содержать минимум 15 символов";
+        }
+        if (empty($request->patient_id) || !Patient::find($request->patient_id)) {
+            return "Укажите корректного пациента";
+        }
+        if (empty($request->doctor_id) || !Doctor::find($request->doctor_id)) {
+            return "Укажите корректного врача";
+        }
 
-    private function validate(Request $request): array
-    {
-        return $request->validate([
-            'title' => ['required','string','min:15','max:255'],
-            'appointment_date' => ['required','date', 'after_or_equal:today'],
-            'appointment_time' => ['required'],
-            'symptoms' => ['required','string','min:15','max:255'],
-            'patient_id' => ['required','integer','exists:patients,id'],
-            'doctor_id' => ['required','integer','exists:doctors,id'],
-        ]);
-    }
-
-    private function chekDoctorAvailability(int $doctor_id, string $date, string $time): void
-    {
-        $exists = Appointment::where('doctor_id', $doctor_id)
-            ->where('appointment_date', $date)
-            ->where('appointment_time', $time)
+        $isBusy = Appointment::where('doctor_id', $request->doctor_id)
+            ->where('appointment_date', $request->appointment_date)
+            ->where('appointment_time', $request->appointment_time)
             ->exists();
 
-        if($exists) {
-            throw new \Exception("Врач уже занят в это время");
+        if ($isBusy) {
+            return "Врач уже занят в это время";
         }
-    }
 
-    private function createAppointment(array $data): void
-    {
         $createInfo = CreateInfo::create([
             'create_date' => date('Y-m-d'),
             'user_id' => Auth::user()->id
         ]);
 
-        Appointment::addAppointment([
-            'title' => $data['title'],
-            'appointment_date' => $data['appointment_date'],
-            'appointment_time' => $data['appointment_time'],
-            'symptoms' => $data['symptoms'],
-            'patient_id' => $data['patient_id'],
-            'doctor_id' => $data['doctor_id'],
-            'createInfo_id' => $createInfo->id
-        ]);
+        $appointment = new Appointment();
+        $appointment->title = $request->title;
+        $appointment->appointment_date = $request->appointment_date;
+        $appointment->appointment_time = $request->appointment_time;
+        $appointment->symptoms = $request->symptoms;
+        $appointment->patient_id = $request->patient_id;
+        $appointment->doctor_id = $request->doctor_id;
+        $appointment->{'create-info_id'} = $createInfo->id;
+
+        if ($appointment->save()) {
+            return true;
+        }
+
+        return "Ошибка при создании записи";
     }
 }

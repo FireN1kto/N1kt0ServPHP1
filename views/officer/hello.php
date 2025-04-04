@@ -3,4 +3,6 @@
 <div>
     <a href="<?= app()->route->getUrl('/addAppointment') ?>">Создать запись</a>
     <a href="<?= app()->route->getUrl('/listAppointments') ?>">Список записей</a>
+    <a href="<?= app()->route->getUrl('/create-patient') ?>">Создать пациента</a>
+    <a href="<?= app()->route->getUrl('/create-doctor') ?>">Создать доктора</a>
 </div>

@@ -39,16 +39,6 @@ class AdminController
         $officers = User::whereHas('role', function ($query) {
             $query->where('name_role', 'registration_officer');
         })->get();
-        if($request->method == 'POST'){
-            $data = $request->all();
-            $officer = User::find($request->id);
-
-            if ($officer && $officer->role_id->name_role == 'registration_officer') {
-                User::where('id', $data['id'])->delete();
-            }
-
-            app()->route->redirect('/officers-list');
-        }
         return new View('admin.officers-list', ['officers' => $officers]);
     }
 }
