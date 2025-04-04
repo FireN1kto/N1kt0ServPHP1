@@ -12,6 +12,8 @@ class AuthMiddleware
     {
         if (!Auth::check()) {
             app()->route->redirect('/login');
+            return false;
         }
+        return true;
     }
 }

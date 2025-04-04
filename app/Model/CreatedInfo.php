@@ -3,9 +3,12 @@
 namespace Model;
 
 use Illuminate\Database\Eloquent\Model;
-class CreateInfo extends Model
+use Model\User;
+class CreatedInfo extends Model
 {
-    protected $table = 'create_info';
+    protected $table = 'created_info';
+
+    public $timestamps = false;
     protected $fillable = [
         'creation_date',
         'user_id'

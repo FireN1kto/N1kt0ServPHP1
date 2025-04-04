@@ -19,3 +19,7 @@ Route::add(['GET', 'POST'], '/create-patient', [Controller\PatientController::cl
     ->middleware('auth','officer');
 Route::add(['GET', 'POST'], '/create-doctor', [Controller\DoctorController::class, 'createDoctor'])
     ->middleware('auth','officer');
+Route::add(['GET', 'POST'], '/listPatients', [Controller\PatientController::class, 'listPatients'])
+    ->middleware('auth','officer');
+Route::add(['GET', 'POST'], '/listDoctors', [Controller\DoctorController::class, 'listDoctors'])
+    ->middleware('auth','officer');
