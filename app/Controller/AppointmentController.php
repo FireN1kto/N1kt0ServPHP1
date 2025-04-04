@@ -13,17 +13,17 @@ use Src\View;
 
 class AppointmentController
 {
-    public function AppointmentList()
+    public function AppointmentList(Request $request): string
     {
         $appointments= Appointment::with([
             'patient',
             'doctor',
             'createInfo.user'
         ])->get();
-        return new View('officer.listApointments', ['appointments' => $appointments]);
+       return new View('officer.listAppointments', ['appointments' => $appointments]);
     }
 
-    public function addAppointment(Request $request)
+    public function addAppointment(Request $request): string
     {
         $patients = Patient::all();
         $doctors = Doctor::all();

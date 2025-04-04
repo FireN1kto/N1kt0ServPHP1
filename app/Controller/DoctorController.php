@@ -10,7 +10,7 @@ use Src\Auth\Auth;
 
 class DoctorController
 {
-    public function createDoctor(Request $request)
+    public function createDoctor(Request $request): string
     {
         return new View ('officer.create-doctor');
     }
@@ -64,7 +64,7 @@ class DoctorController
         ]);
     }
 
-    public function listDoctors()
+    public function listDoctors(): string
     {
         $doctors = Doctor::all();
         return new View('officer.listDoctor', ['doctors' => $doctors]);
