@@ -31,3 +31,4 @@
     </div>
 <?php endforeach; ?>
 <a href="/hello">Назад к панели</a>
+<a href="/Filter">Перейти к фильтру</a>
