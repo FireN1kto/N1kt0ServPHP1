@@ -1,4 +1,3 @@
-<h2>Все врачи</h2>
 <table>
     <tr>
         <th>Фаимлия</th>
@@ -27,7 +26,5 @@
         </tr>
     <?php endforeach; ?>
 </table>
-<div class="officer-menu">
     <a href="/hello">Назад к панели</a>
     <a href="/create-patient">Добавить нового</a>
-</div>
