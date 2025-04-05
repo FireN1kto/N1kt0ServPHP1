@@ -15,19 +15,19 @@ class Doctor extends Model
         'surname',
         'name',
         'patronymic',
-        'date-of-birth',
+        'dateOfBirth',
         'specialization',
         'createInfo_id',
         'position_id'
     ];
 
     protected $casts = [
-        'date-of-birth' => 'date',
+        'dateOfBirth' => 'date',
     ];
 
     public function position()
     {
-        return $this->belongsTo(Position::class, 'position_id');
+        return $this->belongsTo(Position::class);
     }
 
     public function appointments()

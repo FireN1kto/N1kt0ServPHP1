@@ -10,6 +10,8 @@ class Appointment extends Model
 
     protected $table = 'appointment';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'appointment_date',
         'appointment_time',
@@ -21,7 +23,7 @@ class Appointment extends Model
     ];
 
     protected $casts = [
-        'appointment_date' => 'date',
+        'appointment_date' => 'date:Y-m-d',
         'appointment_time' => 'datetime:H:i'
     ];
 
@@ -37,6 +39,6 @@ class Appointment extends Model
 
     public function createInfo()
     {
-        return $this->belongsTo(CreateInfo::class, 'createInfo_id');
+        return $this->belongsTo(CreatedInfo::class, 'createInfo_id');
     }
 }

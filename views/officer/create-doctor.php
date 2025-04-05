@@ -1,14 +1,20 @@
 <h2>Добавление нового врача</h2>
-<?php if (isset($error)): ?>
-    <div class="error"><?= $error ?></div>
-<?php endif; ?>
-
 <form method="post">
-    <label>Фамилия: <input type="text" name="surname" value="<?= $old['surname'] ?? '' ?>" required></label>
-    <label>Имя: <input type="text" name="name" value="<?= $old['name'] ?? '' ?>" required></label>
-    <label>Отчество: <input type="text" name="patronymic" value="<?= $old['patronymic'] ?? '' ?>" required></label>
-    <label>Дата рождения: <input type="date" name="birth_date" value="<?= $old['birth_date'] ?? '' ?>" required></label>
-    <label>Специализация: <input type="text" name="specialization" value="<?= $old['specialization'] ?? '' ?>" required></label>
-    <label>Должность: <input type="text" name="position" value="<?= $old['position'] ?? 'Врач' ?>"></label>
-    <button type="submit">Создать</button>
+    <label>Фамилия: <input type="text" name="surname" value="" required></label>
+    <label>Имя: <input type="text" name="name" value="" required></label>
+    <label>Отчество: <input type="text" name="patronymic" value=""></label>
+    <label>Дата рождения: <input type="date" name="dateOfBirth" value="" required></label>
+    <label>Специализация: <input type="text" name="specialization" value="" required></label>
+    <label>Должность:
+        <select name="position_id" required>
+            <option value="">-- Выберите должность --</option>
+            <?php foreach ($positions as $position): ?>
+                <option value="<?= $position->id ?>"><?= $position->name_position ?></option>
+            <?php endforeach; ?>
+        </select>
+    </label>
+    <div class="officer-menu">
+        <button type="submit">Создать</button>
+        <a href="/hello" class="back">Назад к панели</a>
+    </div>
 </form>

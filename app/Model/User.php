@@ -67,6 +67,6 @@ class User extends Model implements IdentityInterface
 
     public function isregistrationOfficer(): bool
     {
-        return $this->role && $this->role->name === 'registration_officer';
+        return $this->role && $this->role->name_role === 'registration_officer';
     }
 }

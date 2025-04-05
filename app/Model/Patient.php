@@ -15,13 +15,19 @@ class Patient extends Model
         'surname',
         'name',
         'patronymic',
-        'date-of-birth',
+        'dateOfBirth',
         'createInfo_id',
     ];
 
     protected $casts = [
-        'date-of-birth' => 'date',
+        'dateOfBirth' => 'date',
     ];
+
+    public function createInfo()
+    {
+        return $this->belongsTo(CreatedInfo::class, 'createInfo_id');
+    }
+
 
     public function appointments()
     {

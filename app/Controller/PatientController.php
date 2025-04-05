@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\Patient;
+use Model\CreatedInfo;
 use Src\Request;
 use Src\View;
 use Src\Auth\Auth;
@@ -11,48 +12,26 @@ class PatientController
 {
     public function createPatient(Request $request): string
     {
-        return new View ('officer.create-patient');
-    }
+        if ($request->method === "POST") {
+            $createInfo = CreatedInfo::create([
+                'creation_date' => date('Y-m-d'),
+                'user_id' => Auth::user()->id
+            ]);
 
-    public function store(Request $request)
-    {
-        if (empty($request->surname) || strlen($request->surname) < 2) {
-            return new View('officer.create-patient', [
-                'error' => "Фамилия должна содержать минимум 2 символа",
-                'old' => $request->all()
+            $patient = new Patient([
+                'surname' => $request->surname,
+                'name' => $request->name,
+                'patronymic' => $request->patronymic,
+                'dateOfBirth' => $request->dateOfBirth,
+                'createInfo_id' => $createInfo->id
             ]);
-        }
-        if (empty($request->name) || strlen($request->name) < 2) {
-            return new View('officer.create-patient', [
-                'error' => "Имя должно содержать минимум 2 символа",
-                'old' => $request->all()
-            ]);
-        }
-        if (empty($request->patronymic) || strlen($request->patronymic) < 2) {
-            return new View('officer.create-patient', [
-                'error' => "Отчество должно содержать минимум 2 символа",
-                'old' => $request->all()
-            ]);
-        }
-        if (empty($request->birth_date)) {
-            return new View('officer.create-patient', [
-                'error' => "Укажите дату рождения",
-                'old' => $request->all()
-            ]);
-        }
-        $patient = new Patient();
-        $patient->surname = $request->surname;
-        $patient->name = $request->name;
-        $patient->patronymic = $request->patronymic ?? null;
-        $patient->birth_date = $request->birth_date;
 
-        if ($patient->save()) {
-            return app() ->route->redirect('/listPatients');
+            if ($patient->save()) {
+                return app()->route->redirect('/listPatients');
+            }
         }
-        return new View('officer.create-patient', [
-            'error' => "Ошибка при создании пациента",
-            'old' => $request->all()
-        ]);
+
+        return new View('officer.create-patient');
     }
 
     public function listPatients(): string
