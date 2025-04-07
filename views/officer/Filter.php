@@ -51,7 +51,10 @@
                     </div>
                 <?php endif; ?>
             </div>
-            <button type="submit" class="btn btn-primary">Применить фильтр</button>
+            <div class="officer-menu">
+                <button type="submit" class="btn btn-primary">Применить фильтр</button>
+                <a href="/hello" class="back">Назад к панели</a>
+            </div>
         </form>
     </div>
     <div class="filter-content">

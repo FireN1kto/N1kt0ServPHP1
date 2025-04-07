@@ -14,7 +14,6 @@ class Appointment extends Model
 
     protected $fillable = [
         'appointment_date',
-        'appointment_time',
         'title',
         'symptoms',
         'createInfo_id',
