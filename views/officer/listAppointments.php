@@ -12,21 +12,21 @@
             <p><span>Пациент: </span>
                 <?= htmlspecialchars(
                     $appointment->patient->surname . ' ' .
-                    $appointment->patient->name . ' ' .
-                    ($appointment->patient->patronymic ?? '')
+                    $appointment->patient->name
                 ) ?></p>
             <p><span>Врач: </span>
                 <?= htmlspecialchars(
                     $appointment->doctor->surname . ' ' .
-                    $appointment->doctor->name . ' ' .
-                    ($appointment->doctor->patronymic ?? '')
+                    $appointment->doctor->name
                 ) ?></p>
             <p><span>Симптомы: </span><?= $appointment->symptoms ?></p>
         </div>
         <div>
             <p>Дата создания: <?= date('d.m.Y', strtotime($appointment->createInfo->create_date)) ?></p>
             <p>Создатель:
-                <?= $appointment->createInfo ? 'ID: ' . $appointment->createInfo->user_id : 'Неизвестно' ?>
+                <?= $appointment->createInfo && $appointment->createInfo->user
+                    ? htmlspecialchars($appointment->createInfo->user->name)
+                    : 'Неизвестно' ?>
             </p>
         </div>
     </div>

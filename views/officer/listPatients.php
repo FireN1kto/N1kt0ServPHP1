@@ -15,7 +15,9 @@
             <td><?= $patient->patronymic ?></td>
             <td><?= date('d.m.Y' ,strtotime($patient->dateOfBirth ))?></td>
             <td>
-                <?= $patient->createInfo->user_id->name ?? 'Неизвестно' ?>
+                <?= $patient->createInfo && $patient->createInfo->user
+                    ? htmlspecialchars($patient->createInfo->user->name)
+                    : 'Неизвестно' ?>
             </td>
             <td>
                 <?= $patient->createInfo->creation_date ?? 'Неизвестно' ?>

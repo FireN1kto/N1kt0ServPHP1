@@ -5,20 +5,22 @@
         <input type="text" name="title" value="" required minlength="15" maxlength="255">
     </div>
     <div class="form-group">
-        <label>Пациент: </label>
+        <label for="patient_id">Пациент:</label>
         <select name="patient_id" required>
-            <option value="">--Выберите пациента--</option>
             <?php foreach ($patients as $patient): ?>
-                <option value="<?= $patient->id ?>"><?= $patient->name ?></option>
+                <option value="<?= $patient->id ?>">
+                    <?= htmlspecialchars($patient->surname . ' ' . $patient->name) ?>
+                </option>
             <?php endforeach; ?>
         </select>
     </div>
     <div class="form-group">
-        <label>Врач: </label>
+        <label for="doctor_id">Врач:</label>
         <select name="doctor_id" required>
-            <option value="">--Выберите врача--</option>
             <?php foreach ($doctors as $doctor): ?>
-                <option value="<?= $doctor->id ?>"><?= $doctor->name ?></option>
+                <option value="<?= $doctor->id ?>">
+                    <?= htmlspecialchars($doctor->surname . ' ' . $doctor->name) ?>
+                </option>
             <?php endforeach; ?>
         </select>
     </div>

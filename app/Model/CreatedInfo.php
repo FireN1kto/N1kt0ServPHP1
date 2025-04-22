@@ -20,7 +20,7 @@ class CreatedInfo extends Model
 
     public function user()
     {
-        return $this->belongTo('Model\User', 'user_id');
+        return $this->belongsTo('Model\User', 'user_id');
     }
 
     public function appointment()

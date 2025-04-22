@@ -18,7 +18,7 @@ class AppointmentController
         $appointments= Appointment::with([
             'patient',
             'doctor',
-            'createInfo'
+            'createInfo.user'
         ])->get();
         return new View('officer.listAppointments', ['appointments' => $appointments]);
     }
@@ -27,6 +27,23 @@ class AppointmentController
     {
         $patients = Patient::all();
         $doctors = Doctor::all();
+
+        if ($request->method === "POST") {
+            $patient_id = $request->patient_id;
+            $doctor_id = $request->doctor_id;
+
+            $patient = Patient::find($patient_id);
+            $doctor = Doctor::find($doctor_id);
+
+            if (!$patient || !$doctor) {
+                return new View('officer.addAppointment', [
+                    'patients' => $patients,
+                    'doctors' => $doctors,
+                    'currentDate' => date('Y-m-d'),
+                    'error' => 'Выбранный пациент или врач не существует.'
+                ]);
+            }
+        }
 
         if ($request->method === "POST") {
             $createInfo = CreatedInfo::create([
@@ -40,7 +57,7 @@ class AppointmentController
                 'symptoms' => $request->symptoms,
                 'patient_id' => $request->patient_id,
                 'doctor_id' => $request->doctor_id,
-                'createInfo_id' => $createInfo->id
+                'createInfo_id' => $createInfo->id,
             ]);
 
             if ($appointment->save()) {

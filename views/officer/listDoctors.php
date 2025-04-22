@@ -19,7 +19,9 @@
             <td><?= $doctor->specialization ?></td>
             <td><?= $doctor->position->name_position ?></td>
             <td>
-                <?= $doctor->createInfo->user_id->name ?? 'Неизвестно' ?>
+                <?= $doctor->createInfo && $doctor->createInfo->user
+                    ? htmlspecialchars($doctor->createInfo->user->name)
+                    : 'Неизвестно' ?>
             </td>
             <td>
                 <?= $doctor->createInfo->creation_date ?? 'Неизвестно' ?>
