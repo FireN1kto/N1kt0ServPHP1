@@ -65,8 +65,8 @@ class User extends Model implements IdentityInterface
         })->exists();
     }
 
-    public function isregistrationOfficer(): bool
+    public function createdInfos()
     {
-        return $this->role && $this->role->name_role === 'registration_officer';
+        return $this->hasMany(CreatedInfo::class, 'user_id');
     }
 }

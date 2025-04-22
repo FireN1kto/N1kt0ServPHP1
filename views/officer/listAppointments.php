@@ -6,7 +6,6 @@
             <div class ="data-appointment">
                 <h2>Дата и время записи:</h2>
                 <p><?= date('d.m.Y', strtotime($appointment->appointment_date)) ?></p>
-                <p><?= date('H:i', strtotime($appointment->createInfo->create_date)) ?></p>
             </div>
         </div>
         <div>
@@ -26,9 +25,13 @@
         </div>
         <div>
             <p>Дата создания: <?= date('d.m.Y', strtotime($appointment->createInfo->create_date)) ?></p>
-            <p>Создатель: <?= $appointment->createInfo->user_id->name ?></p>
+            <p>Создатель:
+                <?= $appointment->createInfo ? 'ID: ' . $appointment->createInfo->user_id : 'Неизвестно' ?>
+            </p>
         </div>
     </div>
 <?php endforeach; ?>
-<a href="/hello">Назад к панели</a>
-<a href="/Filter">Перейти к фильтру</a>
+<div class="officer-menu">
+    <a href="/hello">Назад к панели</a>
+    <a href="/Filter">Перейти к фильтру</a>
+</div>

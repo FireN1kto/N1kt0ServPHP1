@@ -1,5 +1,5 @@
 <h2>Список сотрудников регистратуры</h2>
-<table>
+<table class="list-officer">
     <tr>
         <th>ФИО</th>
         <th>Логин</th>
@@ -11,5 +11,7 @@
         </tr>
     <?php endforeach; ?>
 </table>
-<a href="/create-officer">Добавить нового</a>
-<a href="/hello">Назад к панели</a>
+<div class="admin-menu">
+    <a href="/create-officer">Добавить нового</a>
+    <a href="/hello">Назад к панели</a>
+</div>

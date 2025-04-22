@@ -10,16 +10,21 @@ class CreatedInfo extends Model
 
     public $timestamps = false;
     protected $fillable = [
-        'creation_date',
+        'create_date',
         'user_id'
     ];
 
     protected $casts = [
-        'creation_date' => 'date',
+        'create_date' => 'date',
     ];
 
     public function user()
     {
-        return $this->belongTo(User::class, 'user_id');
+        return $this->belongTo('Model\User', 'user_id');
+    }
+
+    public function appointment()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

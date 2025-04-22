@@ -3,7 +3,7 @@
     <label>Фамилия: <input type="text" name="surname" value="" required></label>
     <label>Имя: <input type="text" name="name" value="" required></label>
     <label>Отчество: <input type="text" name="patronymic" value=""></label>
-    <label>Дата рождения: <input type="date" name="birth_date" value="" required></label>
+    <label>Дата рождения: <input type="date" name="dateOfBirth" value="" required></label>
     <label>Специализация: <input type="text" name="specialization" value="" required></label>
     <label>Должность:
         <select name="position_id" required>
@@ -13,6 +13,8 @@
             <?php endforeach; ?>
         </select>
     </label>
-    <button type="submit">Создать</button>
+    <div class="officer-menu">
+        <button type="submit">Создать</button>
+        <a href="/hello" class="back">Назад к панели</a>
+    </div>
 </form>
-<a href="/hello">Назад к панели</a>

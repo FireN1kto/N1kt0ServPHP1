@@ -17,9 +17,7 @@ class Appointment extends Model
         'appointment_time',
         'title',
         'symptoms',
-        'createInfo_id',
-        'doctor_id',
-        'patient_id'
+        'createInfo_id'
     ];
 
     protected $casts = [

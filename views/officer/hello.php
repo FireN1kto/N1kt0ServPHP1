@@ -1,6 +1,6 @@
 <h1><?= $message ?></h1>
 <h2>Добро пожаловать <?= app()->auth::user()->name ?>!</h2>
-<div>
+<div class="officer-nav">
     <a href="<?= app()->route->getUrl('/addAppointment') ?>">Создать запись</a>
     <a href="<?= app()->route->getUrl('/listAppointments') ?>">Список записей</a>
     <a href="<?= app()->route->getUrl('/create-patient') ?>">Создать пациента</a>

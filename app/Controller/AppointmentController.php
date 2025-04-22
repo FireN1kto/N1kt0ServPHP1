@@ -37,7 +37,6 @@ class AppointmentController
             $appointment = new Appointment([
                 'title' => $request->title,
                 'appointment_date' => $request->appointment_date,
-                'appointment_time' => $request->appointment_time,
                 'symptoms' => $request->symptoms,
                 'patient_id' => $request->patient_id,
                 'doctor_id' => $request->doctor_id,

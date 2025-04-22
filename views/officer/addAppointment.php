@@ -1,5 +1,5 @@
 <h2>Добавление новой записи</h2>
-<form method="post">
+<form method="post" class="create-appointment">
     <div class="form-group">
         <label>Название записи: </label>
         <input type="text" name="title" value="" required minlength="15" maxlength="255">
@@ -27,14 +27,12 @@
         <input type="date" name="appointment_date" min="<?= $currentDate ?>" value="<?= $currentDate ?>" required>
     </div>
     <div class="form-group">
-        <label>Время приёма</label>
-        <input type="time" name="appointment_time" value="09:00" required>
-    </div>
-    <div class="form-group">
         <label>Симптомы</label>
         <textarea name="symptoms" required minlength="20" maxlength="500"></textarea>
     </div>
-    <button type="submit">Создать запись</button>
+    <div class="officer-menu">
+        <button type="submit">Создать запись</button>
+        <a href="/hello" class="back">Назад к панели</a>
+    </div>
 </form>
-<a href="/hello">Назад к панели</a>
 
