@@ -172,3 +172,37 @@ main > form > button {
 .back {
     width: 100%;
 }
+
+.appointment-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+.filter-form {
+    margin-bottom: 20px;
+}
+
+.filter-form select {
+    padding: 5px;
+    font-size: 14px;
+}
+
+#appointmentsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filters {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}

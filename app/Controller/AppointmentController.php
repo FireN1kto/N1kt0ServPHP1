@@ -10,16 +10,26 @@ use Src\Auth\Auth;
 use Src\Request;
 use Src\View;
 
-
 class AppointmentController
 {
     public function AppointmentList(Request $request): string
     {
-        $appointments= Appointment::with([
+        // Проверяем, была ли нажата кнопка "Отменить запись"
+        if ($request->method === 'POST' && !empty($request->delete_appointment_id)) {
+            $id = (int)$request->delete_appointment_id;
+            $appointment = Appointment::find($id);
+            if ($appointment) {
+                $appointment->delete();
+            }
+        }
+
+        // Получаем актуальный список записей
+        $appointments = Appointment::with([
             'patient',
             'doctor',
             'createInfo.user'
         ])->get();
+
         return new View('officer.listAppointments', ['appointments' => $appointments]);
     }
 
