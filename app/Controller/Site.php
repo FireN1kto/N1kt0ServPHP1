@@ -7,6 +7,7 @@ use Model\Role;
 use Src\View;
 use Src\Request;
 use Src\Auth\Auth;
+use Src\Validator\Validator;
 
 class Site
 {
@@ -28,17 +29,24 @@ class Site
     {
         $roles = Role::all();
         $allowAdmin = !User::adminExists();
-
         if ($request->method === 'POST') {
-            $data = $request->all();
-            if (!$allowAdmin) {
-                $data['role_id'] = Role::where('name_role', 'user')->first()->id;
-            } else {
-                $data['role_id'] = $request->role_id;
+
+            $validator = new Validator($request->all(), [
+                'name' => ['required'],
+                'login' => ['required', 'unique:users,login'],
+                'password' => ['required']
+            ], [
+                'required' => 'Поле :field пусто',
+                'unique' => 'Поле :field должно быть уникально'
+            ]);
+
+            if($validator->fails()){
+                return new View('site.signup',
+                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
             }
-            if(User::create($data)) {
-                Auth::attempt($data);
-                return app()->route->redirect('/hello');
+
+            if (User::create($request->all())) {
+                app()->route->redirect('/login');
             }
         }
         return new View('site.signup', [

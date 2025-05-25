@@ -206,3 +206,8 @@ main > form > button {
     display: flex;
     flex-direction: column;
 }
+
+.errorValidate {
+    margin-top: 3%;
+    color: red;
+}
