@@ -45,7 +45,19 @@ class Site
                     ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
             }
 
-            if (User::create($request->all())) {
+            $adminRole = Role::where('name_role', 'admin')->first();
+            $userRole = Role::where('name_role', 'user')->first();
+
+            $roleId = $allowAdmin ? $adminRole->id : $userRole->id;
+
+            $userData = [
+                'name' => $request->name,
+                'login' => $request->login,
+                'password' => $request->password,
+                'role_id' => $roleId
+            ];
+
+            if (User::create($userData)) {
                 app()->route->redirect('/login');
             }
         }
