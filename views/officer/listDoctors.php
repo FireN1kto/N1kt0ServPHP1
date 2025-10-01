@@ -31,5 +31,5 @@
 </table>
 <div class="officer-menu">
     <a href="/hello">Назад к панели</a>
-    <a href="/create-patient">Добавить нового</a>
+    <a href="/create-doctor">Добавить нового</a>
 </div>
