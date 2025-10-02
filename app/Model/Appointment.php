@@ -17,6 +17,7 @@ class Appointment extends Model
         'appointment_time',
         'title',
         'symptoms',
+        'image',
         'createInfo_id',
         'doctor_id',
         'patient_id'

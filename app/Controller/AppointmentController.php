@@ -54,6 +54,27 @@ class AppointmentController
                 ]);
             }
         }
+        $imagePath = null;
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/public/img/diagnosis/';
+
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            $fileType = $_FILES['image']['type'];
+
+            if (in_array($fileType, $allowedTypes)) {
+                $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $fileName = uniqid() . '_' . time() . '.' . $extension;
+                $imagePath = '/img/diagnosis/' . $fileName;
+
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadDir . $fileName)) {
+                    $imagePath = '/img/diagnosis/' . $fileName;
+                }
+            }
+        }
 
         if ($request->method === "POST") {
             $createInfo = CreatedInfo::create([
@@ -65,6 +86,7 @@ class AppointmentController
                 'title' => $request->title,
                 'appointment_date' => $request->appointment_date,
                 'symptoms' => $request->symptoms,
+                'image' => $imagePath,
                 'patient_id' => $request->patient_id,
                 'doctor_id' => $request->doctor_id,
                 'createInfo_id' => $createInfo->id,

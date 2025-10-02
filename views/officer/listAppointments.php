@@ -75,6 +75,18 @@
                 <p><span>Врач: </span><?= $doctorName ?></p>
                 <p><span>Симптомы: </span><?= $appointment->symptoms ?></p>
             </div>
+            <?php if ($appointment->image): ?>
+                <div class="image">
+                    <p><span>Фото диагноза:</span></p>
+                    <img src="<?= $appointment->image ?>"
+                         alt="Фото диагноза"
+                         style="max-width: 300px; max-height: 300px; border: 1px solid #ccc; padding: 5px;">
+                    <br>
+                    <a href="<?= $appointment->image ?>" target="_blank">Открыть в полном размере</a>
+                </div>
+            <?php else: ?>
+                <p><span>Фото диагноза:</span> не прикреплено</p>
+            <?php endif; ?>
             <div>
                 <p>Дата создания: <?= date('d.m.Y', strtotime($appointment->createInfo->create_date)) ?></p>
                 <p>Создатель:
@@ -139,5 +151,4 @@
 
 <div class="officer-menu">
     <a href="/hello">Назад к панели</a>
-    <a href="/Filter">Перейти к фильтру</a>
 </div>
