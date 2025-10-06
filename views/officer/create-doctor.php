@@ -1,4 +1,5 @@
 <h2>Добавление нового врача</h2>
+<h3 class="errorValidate"><?= $message ?? ''; ?></h3>
 <form method="post">
     <label>Фамилия: <input type="text" name="surname" value="" required></label>
     <label>Имя: <input type="text" name="name" value="" required></label>

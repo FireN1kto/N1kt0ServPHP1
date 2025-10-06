@@ -23,7 +23,6 @@ class AppointmentController
             }
         }
 
-        // Получаем актуальный список записей
         $appointments = Appointment::with([
             'patient',
             'doctor',
@@ -39,6 +38,31 @@ class AppointmentController
         $doctors = Doctor::all();
 
         if ($request->method === "POST") {
+            $validator = new \Src\Validator\Validator($request->all(), [
+                'title' => ['required', 'min:5', 'max:255'],
+                'appointment_date' => ['required', 'date'],
+                'symptoms' => ['required', 'min:10', 'max:1000'],
+                'patient_id' => ['required', 'patient_exists'],
+                'doctor_id' => ['required', 'doctor_exists']
+            ], [
+                'required' => 'Поле :field пусто',
+                'min' => 'Поле :field должно содержать минимум :min символов',
+                'max' => 'Поле :field должно содержать максимум :max символов',
+                'date' => 'Поле :field должно быть корректной датой',
+                'patient_exists' => 'Выбранный пациент не существует',
+                'doctor_exists' => 'Выбранный врач не существует'
+            ]);
+
+            if ($validator->fails()) {
+                $errors = $validator->errors();
+                return new View('officer.addAppointment', [
+                    'patients' => $patients,
+                    'doctors' => $doctors,
+                    'currentDate' => date('Y-m-d'),
+                    'message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)
+                ]);
+            }
+
             $patient_id = $request->patient_id;
             $doctor_id = $request->doctor_id;
 

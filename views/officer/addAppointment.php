@@ -1,4 +1,5 @@
 <h2>Добавление новой записи</h2>
+<h3 class="errorValidate"><?= $message ?? ''; ?></h3>
 <form method="post" class="create-appointment" enctype="multipart/form-data">
     <div class="form-group">
         <label>Название записи: </label>

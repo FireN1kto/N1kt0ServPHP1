@@ -14,7 +14,28 @@ class DoctorController
     public function createDoctor(Request $request): string
     {
         $positions = Position::all();
+        $errors = [];
         if ($request->method === "POST") {
+            $validator = new \Src\Validator\Validator($request->all(), [
+                'surname' => ['required'],
+                'name' => ['required'],
+                'patronymic' => ['required'],
+                'dateOfBirth' => ['required', 'date'],
+                'specialization' => ['required', 'min:4']
+            ], [
+                'required' => 'Поле :field пусто',
+                'date' => 'Поле :field должно быть корректной датой',
+                'min' => 'Поле :field должно содержать минимум 4 символов'
+            ]);
+
+            if ($validator->fails()) {
+                $errors = $validator->errors();
+                return new View('officer.create-doctor', [
+                    'positions' => $positions,
+                    'message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)
+                ]);
+            }
+
             $createInfo = CreatedInfo::create([
                 'creation_date' => date('Y-m-d'),
                 'user_id' => Auth::user()->id

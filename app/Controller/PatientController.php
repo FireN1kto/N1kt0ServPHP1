@@ -12,7 +12,23 @@ class PatientController
 {
     public function createPatient(Request $request): string
     {
+        $errors = [];
         if ($request->method === "POST") {
+            $validator = new \Src\Validator\Validator($request->all(), [
+                'surname' => ['required'],
+                'name' => ['required'],
+                'patronymic' => ['required'],
+                'dateOfBirth' => ['required', 'date']
+            ], [
+                'required' => 'Поле :field пусто',
+                'date' => 'Поле :field должно быть корректной датой'
+            ]);
+
+            if ($validator->fails()) {
+                return new View('officer.create-patient', [
+                    'message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            }
+
             $createInfo = CreatedInfo::create([
                 'creation_date' => date('Y-m-d'),
                 'user_id' => Auth::user()->id
