@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9317e347e5af7183a9d6897eb4e1f2d6",
+    "content-hash": "98662488f381fa20fae712b67e760584",
     "packages": [
         {
             "name": "brick/math",
@@ -225,6 +225,50 @@
                 }
             ],
             "time": "2024-02-18T21:47:00+00:00"
+        },
+        {
+            "name": "firen1kto/collect-for-practic",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FireN1kto/CollectForPractic.git",
+                "reference": "db6ac082296f1056d3c433383787db6430909c28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FireN1kto/CollectForPractic/zipball/db6ac082296f1056d3c433383787db6430909c28",
+                "reference": "db6ac082296f1056d3c433383787db6430909c28",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 | ^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Collect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "firen1kto",
+                    "email": "maksimcymbal77@gmail.com"
+                }
+            ],
+            "description": "Module for working with arrays ",
+            "support": {
+                "issues": "https://github.com/FireN1kto/CollectForPractic/issues",
+                "source": "https://github.com/FireN1kto/CollectForPractic/tree/main"
+            },
+            "time": "2025-10-07T05:53:31+00:00"
         },
         {
             "name": "illuminate/bus",
@@ -1581,6 +1625,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "firen1kto/collect-for-practic": 20,
         "illuminate/database": 20,
         "illuminate/events": 20,
         "nikic/fast-route": 20
