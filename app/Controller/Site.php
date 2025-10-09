@@ -11,6 +11,10 @@ use Src\Validator\Validator;
 
 class Site
 {
+    public function index(): void
+    {
+        app()->route->redirect('/login');
+    }
 
     public function hello(): string
     {

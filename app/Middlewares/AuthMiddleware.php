@@ -2,7 +2,6 @@
 
 namespace Middlewares;
 
-use Closure;
 use Src\Auth\Auth;
 use Src\Request;
 

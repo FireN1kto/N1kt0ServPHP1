@@ -25,3 +25,4 @@ Route::add(['GET', 'POST'], '/listDoctors', [Controller\DoctorController::class,
     ->middleware('auth','officer');
 Route::add(['GET', 'POST'], '/Filter', [Controller\FilterController::class, 'Filter'])
     ->middleware('auth', 'officer');
+Route::add('GET', '/', [Controller\Site::class, 'index']);
